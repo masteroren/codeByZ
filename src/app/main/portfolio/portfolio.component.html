@@ -7,7 +7,7 @@
                           (change)="onRefreshRateChange($event)"></app-up-down-number>
     </div>
   </div>
-  <mat-card class="card" *ngFor="let stock of (stocks$ | async) | sortBy:'3. volume'">
+  <mat-card class="card" *ngFor="let stock of (stocks$ | async) | sortBy:'2. price'">
     <mat-card-title>
       Stock: {{stock['1. symbol']}}
     </mat-card-title>

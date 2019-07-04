@@ -1,0 +1,17 @@
+<div>
+    <div class='title-wrap'>
+        <h2>My Portfolio</h2>
+        <div>Refresh Rate (seconds) </div>
+    </div>
+    <mat-card class="card" *ngFor="let stock of (stocks$ | async)">
+      <div class="top">
+        <div>Stock: {{stock['1. symbol']}}</div>
+        <div>Price: ${{stock['2. price']}}</div>
+        <div>Volume: ${{stock['3. volume']}}</div>
+      </div>
+      <div class="bottom">
+        <div>Updated </div>
+        <button (click)="removeStock(stock)">Remove</button>
+      </div>
+    </mat-card>
+</div>

@@ -1,5 +1,6 @@
 <div>
-    <h2>Stock Selector</h2>
-    <updated-list [options]='stockList' (selected)="selectedStock = $event"></updated-list>
-    <button (click)="addStock()">Add</button>
+  <h3>Stock Selector</h3>
+  <updated-list [options]='stockList' (selected)="selectedStock = $event"></updated-list>
+  <button (click)="addStock()">Add Selected Stock</button>
 </div>
+<div>{{message}}</div>

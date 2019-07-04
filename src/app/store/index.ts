@@ -8,6 +8,7 @@ export interface Stock {
 }
 
 export interface StocksState {
+  refreshRate: number;
   stocks: StockState;
 }
 

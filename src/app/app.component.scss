@@ -2,11 +2,13 @@
   display: flex;
   justify-content: center;
 
-  portfolio {
+  app-portfolio {
     margin-right: 30px;
+    width: 20%;
   }
 
-  stock-selector {
+  app-stock-selector {
     margin-left: 30px;
+    width: 20%;
   }
 }

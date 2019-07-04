@@ -9,7 +9,7 @@ import {StocksEffects} from './store/effects';
 import {HttpClientModule} from '@angular/common/http';
 import {PortfolioComponent} from './main/portfolio/portfolio.component';
 import {StockSelectorComponent} from './main/stock-selector/stock-selector.component';
-import {MatCardModule, MatSelectModule} from '@angular/material';
+import {MatButtonModule, MatCardModule, MatSelectModule} from '@angular/material';
 import {SharedModule} from './shared/shared.module';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {StockFacadeService} from './shared/services/facade.service';
@@ -35,6 +35,7 @@ import {MainModule} from './main/main.module';
     MatSelectModule,
     SharedModule,
     MainModule,
+    MatButtonModule,
   ],
   providers: [StockFacadeService],
   bootstrap: [AppComponent]

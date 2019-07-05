@@ -1,1 +1,1 @@
-<input #refreshRate type="number" min="0" class="refresh-rate" value={{refreshRateValue}} (change)="refreashRateChanged(refreshRate.value)">
+<input #refreshRate type="number" min="0" class="refresh-rate" [value]="refreshRateValue" (change)="refreshRateChanged(refreshRate.value)">

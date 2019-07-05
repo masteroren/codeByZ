@@ -1,5 +1,5 @@
-<select #select (change)="selected.emit(select.value)">
-  <option *ngFor='let option of options' [value]="option.name">
+<select #select (change)="selectionChanged(select.value)">
+  <option *ngFor="let option of options" [value]="option.name">
     {{option.name}}
   </option>
 </select>

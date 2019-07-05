@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {StockState} from '../../store';
+import {Stock, StockState} from '../../store';
 import {select, Store} from '@ngrx/store';
 import {Add, Get, Remove, UpdateRefreshRate} from '../../store/actions';
 import {getIds, getRefreshRate, getStocks} from '../../store/selectors';
@@ -19,17 +19,21 @@ export class StockFacadeService {
       )
       .subscribe(value => {
         this.refreshRate = value;
+        // console.log(this.refreshRate)
+        //
+        // if (this.refreshRate === 0) {
+        //   this.stopPolling();
+        // } else {
         this.restartPolling();
+        // }
       });
   }
 
   startPolling() {
-    if (this.refreshRate !== 0) {
-      this.polingSubscription$ = interval(this.refreshRate * 1000)
-        .subscribe(() => {
-          // this.getStocksIds();
-        });
-    }
+    this.polingSubscription$ = interval(this.refreshRate * 1000)
+      .subscribe(() => {
+        this.getStocksIds();
+      });
   }
 
   stopPolling() {
@@ -43,11 +47,18 @@ export class StockFacadeService {
     this.startPolling();
   }
 
-  addStock(stock: string) {
-    this.store.dispatch(new Add({'1. symbol': stock}));
+  addStock(stockName: string) {
+    this.store.dispatch(new Add({
+      '1. symbol': stockName,
+      createTimeStamp: Date.now(),
+    }));
   }
 
   getStocksIds() {
+    if (this.refreshRate === 0) {
+      return;
+    }
+
     this.store
       .pipe(
         select(getIds),
@@ -63,9 +74,27 @@ export class StockFacadeService {
   }
 
   getAll() {
+    const currentTime = Date.now();
+
     return this.store
       .pipe(
         select(getStocks),
+        map((stocks: Stock[]) => {
+          stocks.forEach((stock: Stock) => {
+            const diff = new Date(currentTime - stock.createTimeStamp);
+            const seconds = diff.getSeconds();
+            const minutes = diff.getMinutes();
+            const hours = diff.getHours() + (diff.getTimezoneOffset() / 60);
+            if (hours > 0) {
+              stock.lastUpdate = `Updated ${hours} hours ago`;
+            } else if (minutes > 0) {
+              stock.lastUpdate = `Updated ${minutes} minutes ago`;
+            } else if (seconds > 0) {
+              stock.lastUpdate = `Updated a few seconds ago`;
+            }
+          });
+          return stocks;
+        }),
         take(1),
       );
   }
@@ -75,14 +104,16 @@ export class StockFacadeService {
   }
 
   updateRefreshRate(refreshRate: number) {
-    this.store.dispatch(new UpdateRefreshRate(refreshRate));
+    if (typeof (refreshRate) === 'number') {
+      this.store.dispatch(new UpdateRefreshRate(refreshRate));
+    }
   }
 
   getRefreshRate() {
     return this.store
       .pipe(
         select(getRefreshRate),
-        take(1),
+        // take(1),
       );
   }
 }

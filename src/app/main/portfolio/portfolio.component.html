@@ -1,13 +1,13 @@
 <div>
   <div class='title-wrap'>
     <h3>My Portfolio</h3>
-    <div class="refresh-rate">
-      <div>Refresh Rate (seconds)</div>
+    <div class="refresh-rate-wrapper">
+      <div class="refresh-rate-title">Refresh Rate (seconds)</div>
       <app-up-down-number [refreshRateValue]="refreshRate$ | async"
                           (change)="onRefreshRateChange($event)"></app-up-down-number>
     </div>
   </div>
-  <mat-card class="card" *ngFor="let stock of (stocks$ | async) | sortBy:'2. price'">
+  <mat-card class="card" *ngFor="let stock of (stocks$ | async) | sortBy:'3. volume'">
     <mat-card-title>
       Stock: {{stock['1. symbol']}}
     </mat-card-title>
@@ -17,7 +17,7 @@
         <div>Volume: {{stock['3. volume'] && stock['3. volume'] !== '--' ? '$' + stock['3. volume'] : 'N/A'}}</div>
       </div>
       <div class="bottom">
-        <div>Updated</div>
+        <div>{{stock.lastUpdate}}</div>
         <button (click)="removeStock(stock['1. symbol'])">Remove</button>
       </div>
     </mat-card-content>

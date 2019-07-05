@@ -9,7 +9,7 @@ export const adapter = createEntityAdapter<Stock>({
 });
 
 const initialState: StocksState = {
-  refreshRate: 10,
+  refreshRate: 30,
   stocks: adapter.getInitialState(),
 };
 
@@ -17,13 +17,13 @@ export function stocksReducer(state: StocksState = initialState, action) {
   const newState = {...state};
 
   switch (action.type) {
-    case StockActions.ADD_SUCCESS:
+    case StockActions.ADD:
       newState.stocks = adapter.addOne(action.payload, newState.stocks);
       return newState;
     case StockActions.GET_SUCCESS:
       newState.stocks = adapter.upsertMany(action.payload, newState.stocks);
       return newState;
-    case StockActions.REMOVE_SUCCESS:
+    case StockActions.REMOVE:
       newState.stocks = adapter.removeOne(action.payload, newState.stocks);
       return newState;
     case StockActions.UPDATE_REFRESH_RATE:

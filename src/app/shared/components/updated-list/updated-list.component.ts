@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-
+import {SelectOption} from '../../interfaces/select-options';
 
 @Component({
   selector: 'updated-list',
@@ -17,4 +17,7 @@ export class UpdatedListComponent implements OnInit {
     this.selected.emit(this.options[0].name);
   }
 
+  selectionChanged(value: any) {
+    this.selected.emit(value);
+  }
 }

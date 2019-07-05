@@ -4,7 +4,9 @@ export interface Stock {
   symbol: string;
   price: string;
   volume: string;
-  timeStamp: string;
+  timestamp: string;
+  createTimeStamp?: number;
+  lastUpdate?: string;
 }
 
 export interface StocksState {

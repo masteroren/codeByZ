@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {STOCK_TYPES} from 'src/app/shared/types/stock.types';
 import {StockFacadeService} from '../../shared/services/facade.service';
-import {Action, ActionsSubject} from '@ngrx/store';
+import {ActionsSubject} from '@ngrx/store';
 import {StockActions} from '../../store/actions';
-import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-stock-selector',
@@ -12,8 +11,8 @@ import {tap} from 'rxjs/operators';
 })
 export class StockSelectorComponent implements OnInit {
 
-  public stockList = [...STOCK_TYPES];
-  public selectedStock;
+  public stockNames = [...STOCK_TYPES];
+  public selectedStockName: string;
   public message: string;
 
   constructor(private stockFacade: StockFacadeService, private actionsSubject: ActionsSubject) {
@@ -24,6 +23,20 @@ export class StockSelectorComponent implements OnInit {
       .subscribe(action => {
         switch (action.type) {
           case StockActions.ADD_SUCCESS:
+            this.stockNames = this.stockNames.map(item => {
+              if (item.name === this.selectedStockName) {
+                item.selected = true;
+              }
+              return item;
+            });
+            return;
+          case StockActions.REMOVE_SUCCESS:
+            this.stockNames = this.stockNames.map(item => {
+              if (item.name === action['payload']) {
+                item.selected = false;
+              }
+              return item;
+            });
             return;
           case StockActions.GET_SUCCESS:
             this.message = '';
@@ -42,6 +55,6 @@ export class StockSelectorComponent implements OnInit {
   }
 
   addStock() {
-    this.stockFacade.addStock(this.selectedStock);
+    this.stockFacade.addStock(this.selectedStockName);
   }
 }

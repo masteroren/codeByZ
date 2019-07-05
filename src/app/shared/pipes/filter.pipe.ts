@@ -1,8 +1,11 @@
-import { Pipe } from "@angular/core";
+import {Pipe, PipeTransform} from '@angular/core';
+import {SelectOption} from '../interfaces/select-options';
 
 @Pipe({
-    name: 'filter',
+  name: 'filter',
 })
-export class FilterPipe {
-    transform(array: Stock[], args: string): 
+export class FilterPipe implements PipeTransform {
+  transform(list: SelectOption[], name: string, value: boolean): SelectOption[] {
+    return list.filter(item => item[name] === value);
+  }
 }

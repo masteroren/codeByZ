@@ -16,7 +16,9 @@ export class UpDownNumberComponent implements OnInit {
   ngOnInit() {
   }
 
-  refreashRateChanged(value: number) {
-    this.change.emit(value);
+  refreshRateChanged(value: string) {
+    if (typeof(value) === 'string') {
+      this.change.emit(parseInt(value));
+    }
   }
 }

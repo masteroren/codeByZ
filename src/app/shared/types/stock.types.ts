@@ -1,9 +1,5 @@
-export interface SelectOption {
-    name: string;
-    selected: boolean;
-  }
-
-export const STOCK_TYPES = [
+import {SelectOption} from '../interfaces/select-options';
+export const STOCK_TYPES: SelectOption[] = [
     {
         name: 'AAPL',
         selected: false,

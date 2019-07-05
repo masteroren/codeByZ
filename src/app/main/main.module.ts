@@ -11,6 +11,6 @@ import {StocksEffects} from '../store/effects';
     CommonModule,
     StoreModule.forFeature('stocks', stocksReducer),
     EffectsModule.forFeature([StocksEffects]),
-  ]
+  ],
 })
 export class MainModule { }

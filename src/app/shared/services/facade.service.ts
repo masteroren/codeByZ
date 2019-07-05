@@ -27,7 +27,7 @@ export class StockFacadeService {
     if (this.refreshRate !== 0) {
       this.polingSubscription$ = interval(this.refreshRate * 1000)
         .subscribe(() => {
-          this.getStocksIds();
+          // this.getStocksIds();
         });
     }
   }
@@ -82,6 +82,7 @@ export class StockFacadeService {
     return this.store
       .pipe(
         select(getRefreshRate),
+        take(1),
       );
   }
 }

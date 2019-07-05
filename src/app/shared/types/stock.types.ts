@@ -1,3 +1,8 @@
+export interface SelectOption {
+    name: string;
+    selected: boolean;
+  }
+
 export const STOCK_TYPES = [
     {
         name: 'AAPL',

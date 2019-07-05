@@ -1,9 +1,5 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 
-export interface SelectOption {
-  name: string;
-  selected: boolean;
-}
 
 @Component({
   selector: 'updated-list',

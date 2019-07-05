@@ -1,3 +1,1 @@
-<button (click)="plus()">+</button>
-<input class="number-value" [value]="refreshRateValue">
-<button (click)="minus()">-</button>
+<input #refreshRate type="number" min="0" class="refresh-rate" value={{refreshRateValue}} (change)="refreashRateChanged(refreshRate.value)">

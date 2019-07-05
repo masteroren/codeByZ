@@ -7,7 +7,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class UpDownNumberComponent implements OnInit {
 
-  @Input() refreshRateValue;
+  @Input() refreshRateValue: number;
   @Output() change = new EventEmitter();
 
   constructor() {
@@ -16,16 +16,7 @@ export class UpDownNumberComponent implements OnInit {
   ngOnInit() {
   }
 
-  plus() {
-    this.refreshRateValue++;
-    this.change.emit(this.refreshRateValue);
-  }
-
-  minus() {
-    if (this.refreshRateValue === 0) {
-      return;
-    }
-    this.refreshRateValue--;
-    this.change.emit(this.refreshRateValue);
+  refreashRateChanged(value: number) {
+    this.change.emit(value);
   }
 }

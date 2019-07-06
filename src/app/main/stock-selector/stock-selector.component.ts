@@ -55,6 +55,11 @@ export class StockSelectorComponent implements OnInit {
   }
 
   addStock() {
-    this.stockFacade.addStock(this.selectedStockName);
+    if (this.selectedStockName) {
+      this.message = '';
+      this.stockFacade.addStock(this.selectedStockName);
+    } else {
+      this.message = 'Invalid stock selected';
+    }
   }
 }

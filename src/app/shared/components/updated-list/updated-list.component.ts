@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {SelectOption} from '../../interfaces/select-options';
 
 @Component({
@@ -6,18 +6,15 @@ import {SelectOption} from '../../interfaces/select-options';
   templateUrl: './updated-list.component.html',
   styleUrls: ['./updated-list.component.scss']
 })
-export class UpdatedListComponent implements OnInit {
+export class UpdatedListComponent {
 
   @Input() options: SelectOption[];
   @Output() selected = new EventEmitter();
 
-  constructor() { }
-
-  ngOnInit() {
-    this.selected.emit(this.options[0].name);
-  }
-
-  selectionChanged(value: any) {
-    this.selected.emit(value);
+  selectionChanged(index: number) {
+    if (index !== 0) {
+      const option = this.options[index];
+      this.selected.emit(option.name);
+    }
   }
 }

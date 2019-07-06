@@ -1,5 +1,5 @@
 <select #select (change)="selectionChanged(select.value)">
-  <option *ngFor="let option of options" [value]="option.name">
+  <option *ngFor="let option of options, index as i" [attr.value]="i">
     {{option.name}}
   </option>
 </select>

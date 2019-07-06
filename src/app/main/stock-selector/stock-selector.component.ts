@@ -37,6 +37,7 @@ export class StockSelectorComponent implements OnInit {
               }
               return item;
             });
+            this.selectedStockName = this.stockNames[0].name;
             return;
           case StockActions.GET_SUCCESS:
             this.message = '';
@@ -54,12 +55,8 @@ export class StockSelectorComponent implements OnInit {
       });
   }
 
-  addStock() {
-    if (this.selectedStockName) {
-      this.message = '';
-      this.stockFacade.addStock(this.selectedStockName);
-    } else {
-      this.message = 'Invalid stock selected';
-    }
+  addStock(stockName: string) {
+    this.selectedStockName = stockName;
+    this.stockFacade.addStock(this.selectedStockName);
   }
 }

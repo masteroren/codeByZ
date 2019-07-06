@@ -1,6 +1,5 @@
 <div>
   <h3>Stock Selector</h3>
-  <updated-list [options]="stockNames | filter:'selected':false" (selected)="selectedStockName = $event"></updated-list>
-  <button class="add-stock" (click)="addStock()">Add</button>
+  <updated-list [options]="stockNames | filter:'selected':false" (selected)="addStock($event)"></updated-list>
 </div>
 <div>{{message}}</div>

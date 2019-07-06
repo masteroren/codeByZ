@@ -3,3 +3,9 @@
     width: 50px;
   }
 }
+
+@media screen and (max-width: 400px) {
+  .refresh-rate {
+    width: 20px !important;
+  }
+}
